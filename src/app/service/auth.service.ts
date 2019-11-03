@@ -20,7 +20,7 @@ export interface TokenPayload {
 export class AuthService {
   @Output() change: EventEmitter<any> = new EventEmitter();
   private token: string;
-  readonly endpoint = 'http://localhost:23196/siima/users';
+  readonly endpoint = 'http://localhost:23196/users';
   readonly httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json'
@@ -52,6 +52,7 @@ export class AuthService {
   }
 
   public signUp( username: string, email:string , password: string ) {
+    console.log(JSON.stringify({username : username, mail: email, password: password }));
     return this.httpClient
       .post(this.endpoint + "/" , JSON.stringify({username : username, mail: email, password: password }));
   }

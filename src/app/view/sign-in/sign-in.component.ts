@@ -9,6 +9,9 @@ import { NgForm } from '@angular/forms';
 })
 export class SignInComponent implements OnInit {
 
+  private signUpErrorMessage : string | undefined =  undefined;
+  private email : string;
+  private password : string;
 
   constructor(
     private authService: AuthService,
@@ -18,12 +21,14 @@ export class SignInComponent implements OnInit {
   }
 
   async onSignIn(form: NgForm) {
-    const email = form.value['email'];
-    const password = form.value['password'];
+    this.signUpErrorMessage = undefined;
+    this.email = form.value['email'];
+    this.password = form.value['password'];
     try{
-      await this.authService.signIn(email, password);
+      await this.authService.signIn(this.email, this.password);
     } catch(e) {
       console.log(e);
+      this.signUpErrorMessage = e.message;
     }
   }
 

@@ -2,16 +2,24 @@
   <div class="form-group">
       <label for="email">Entrer l'email</label>
       <input type="email" class="form-control" id="email" placeholder="email" name="email" ngModel>
+      <div *ngIf="f.submitted && !email" class="help-block">Email required</div>
 
       <label for="name">Name</label>
       <input type="text" class="form-control" id="name" name="name" placeholder="nom" ngModel>
+      <div *ngIf="f.submitted && !name" class="help-block">Name required</div>
 
       <label for="password">Entrer le mot de passe</label>
       <input type="password" class="form-control" id="password" placeholder="Password" name="password" ngModel>
+      <div *ngIf="f.submitted && !password" class="help-block">Password required</div>
 
       <label for="cpassword">Confirmer le mot de passe</label>
       <input type="password" class="form-control" id="cpassword" placeholder="Confirm Password" name="cpassword" ngModel>
+      <div *ngIf="(f.submitted && !cpassword) || cpassword !== password" class="help-block">Please enter the same password</div>
 
       <input type="submit" (click)="onSignUp()" value="Submit">
-  </div>
+
+      <div *ngIf="signUpErrorMessage !== undefined" class="help-block">
+          {{signUpErrorMessage}}
+      </div>
+   </div>
 </form>
